@@ -1,9 +1,0 @@
-14/10/2022 08:07:38 PM INFO File_name: scnr.py Function_name: __init__ Line_no: 12 Message: --Running the scraper--
-14/10/2022 08:07:38 PM INFO File_name: scnr.py Function_name: __init__ Line_no: 17 Message: --Scraping screener.in for lodu
-14/10/2022 08:07:39 PM INFO File_name: scnr.py Function_name: scrape_page Line_no: 25 Message: Successfully scraped url : <Response [404]>
-14/10/2022 08:07:39 PM ERROR File_name: scnr.py Function_name: fetch_company_details Line_no: 48 Message: fetch_company_details() failed!
-14/10/2022 08:07:39 PM ERROR File_name: scnr.py Function_name: fetch_company_details Line_no: 49 Message: list index out of range
-Traceback (most recent call last):
-  File "/Users/nb/Desktop/fin/ingestion/scnr.py", line 40, in fetch_company_details
-    'Name': self.html_model.xpath('//*[@id="top"]/div[1]/div/h1')[0].text.strip(),
-IndexError: list index out of range

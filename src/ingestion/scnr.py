@@ -1,5 +1,3 @@
-from cgitb import html
-import json
 import requests 
 from bs4 import BeautifulSoup as bs 
 import pandas as pd
@@ -11,11 +9,11 @@ from lxml import etree
 
 
 class SCREENER:
-    def __init__(self, company_name, json_path):
+    def __init__(self, company_name, config):
         self.logger = set_custom_logger()
         self.logger.info("--Running the scraper--")
 
-        self.json_path = 'conf/app.json'
+        self.config = config
         self.company_name = company_name
         
         if company_name is not None:
@@ -71,8 +69,8 @@ class SCREENER:
     def fetch_tables(self):
         try: 
             self.tables_list = pd.read_html(self.screener_url, flavor='bs4',thousands=',')
-            self.logger.info("Successfully fetched data of {} tables".format(len(self.tables_data)))
-            f_utils.store_csv_in_s3(self.tables_list, self.json_path, self.company_name)
+            self.logger.info("Successfully fetched data of {} tables".format(len(self.tables_list)))
+            f_utils.store_csv_in_s3(self.tables_list, self.config, self.company_name)
             return self.tables_list
         except Exception as e:
             self.logger.error("fetch_tables() failed!")
@@ -125,15 +123,3 @@ class SCREENER:
         except:
             self.logger.error("Couldn't fetch compounded sales growth")
 
-    
-if __name__ == "__main__":
-    obj = SCREENER(company_name='lodu')
-    screener_page = obj.scrape_page()
-    company_details= obj.fetch_company_details(screener_page)
-    ratio_details= obj.fetch_ratio_details()
-    print('Company details:\n')
-    print(company_details, '\n')
-    print('Company Ratio details:\n')
-    print(ratio_details, '\n')
-    tables_data = obj.fetch_tables()
-    
