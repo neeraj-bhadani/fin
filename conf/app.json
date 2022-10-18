@@ -1,0 +1,10 @@
+{
+    "s3": [
+    {
+        "access_key": "AKIA3VTUOFD4YF24MR7N",
+        "secret_key": "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",
+        "bucket_name": "rawvault",
+        "folder_name": "company_info"
+    }
+]
+}
